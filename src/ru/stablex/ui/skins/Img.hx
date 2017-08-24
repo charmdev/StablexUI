@@ -36,7 +36,8 @@ class Img extends Skin{
     *
     */
     override public function draw (w:Widget) : Void {
-        var bmp : BitmapData = this._bitmapData;
+		
+		var bmp : BitmapData = this._bitmapData;
 
         if( bmp == null && this.src != null ){
             bmp = Assets.getBitmapData(this.src);
