@@ -6,7 +6,6 @@ import haxe.macro.Expr;
 import sys.io.File;
 #end
 
-
 /**
 * Assets class wraps openfl.Assets.
 * Its methods are dynamic so you can override them to implement
@@ -58,10 +57,6 @@ class Assets{
     static dynamic public function getText(src:String) : String {
         return #if openfl openfl.Assets.getText(src) #else null #end;
     }//function getText()
-	
-	static dynamic public function getAtlasOfRegion(src:String) : com.nevosoft.isoframework.resources.TextureAtlas {
-        return null;
-    }//function getAtlasOfRegion()
 
 #end
 

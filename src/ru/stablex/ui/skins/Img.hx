@@ -50,8 +50,7 @@ class Img extends Skin
 
         if (bmp == null && this.src != null)
 		{
-			atlas = Assets.getAtlasOfRegion(this.src);
-			
+			atlas = com.nevosoft.isoframework.ResourceManager.instance.getAtlasOfRegion(this.src);
 			if (atlas == null)
 			{
 				bmp = Assets.getBitmapData(this.src);
