@@ -22,9 +22,8 @@ class Assets{
     static dynamic public function getBitmapData(src:String, useCache:Bool = true) : flash.display.BitmapData {
         return #if openfl openfl.Assets.getBitmapData(src, useCache) #else null #end;
     }//function getBitmapData()
-
-
-    /**
+	
+	/**
     * By default it is equal to openfl.Assets.getBytes
     *
     */
@@ -59,6 +58,10 @@ class Assets{
     static dynamic public function getText(src:String) : String {
         return #if openfl openfl.Assets.getText(src) #else null #end;
     }//function getText()
+	
+	static dynamic public function getAtlasOfRegion(src:String) : com.nevosoft.isoframework.resources.TextureAtlas {
+        return null;
+    }//function getAtlasOfRegion()
 
 #end
 

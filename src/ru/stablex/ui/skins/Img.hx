@@ -5,13 +5,21 @@ import ru.stablex.Assets;
 import ru.stablex.ui.widgets.Widget;
 import flash.display.BitmapData;
 
+#if (openfl < "4.0.0")
+import openfl.display.Tilesheet;
+import com.nevosoft.isoframework.resources.TextureAtlas;
+#end
+
 
 /**
 * Img skin always set widget size the same as `.src` bitmapdata size
 *
 */
-class Img extends Skin{
-    //Asset ID or path to bitmap
+class Img extends Skin
+{    
+	private static var matrix:Matrix = new Matrix();
+	
+	//Asset ID or path to bitmap
     public var src (get_src,set_src): String;
     public var _src : String = null;
     /**
@@ -29,13 +37,132 @@ class Img extends Skin{
     public var keepAspect : Bool = false;
     // If set to true as well as `scaleImg` and `keepAspect` the image will be cropped such that it fills the entire widget space
     public var crop : Bool = false;
-
-
+	
     /**
     * Draw skin
     *
     */
-    override public function draw (w:Widget) : Void {
+	#if (openfl < "4.0.0")
+    override public function draw(w:Widget):Void 
+	{
+		var bmp:BitmapData = this._bitmapData;
+		var atlas:TextureAtlas = null;
+
+        if (bmp == null && this.src != null)
+		{
+			atlas = Assets.getAtlasOfRegion(this.src);
+			
+			if (atlas == null)
+			{
+				bmp = Assets.getBitmapData(this.src);
+				if (bmp == null)
+				{
+					Err.trigger('Bitmap not found: ' + this.src);
+				}
+			}
+            
+        } else if (bmp == null)
+		{
+            Err.trigger('Bitmap is not specified');
+        }
+		
+		if (atlas == null)
+		{
+			//scale widget to image (default)
+			if (!scaleImg) 
+			{
+				if (w.w != bmp.width || w.h != bmp.height)
+				{
+					w.resize(bmp.width, bmp.height);
+				}
+				
+				w.graphics.beginBitmapFill(bmp, null, false, this.smooth);
+				w.graphics.drawRect(0, 0, bmp.width, bmp.height);
+				w.graphics.endFill();
+
+			//scale image to widget
+			} 
+			else 
+			{
+				matrix.identity();
+				var scaleX = w.w / bmp.width;
+				var scaleY = w.h / bmp.height;
+
+				if (keepAspect)
+				{
+					scaleX = scaleY = (this.crop ? Math.max(scaleX, scaleY) : Math.min(scaleX, scaleY));
+					matrix.scale (scaleX, scaleY);
+					matrix.translate(
+						(w.w - bmp.width * scaleX) * 0.5,
+						(w.h - bmp.height * scaleY) * 0.5
+					);
+				} 
+				else 
+				{
+					matrix.scale(scaleX, scaleY);
+				}
+
+				w.graphics.beginBitmapFill(bmp, matrix, false, this.smooth);
+				if (this.crop) 
+				{
+					w.graphics.drawRect(0, 0, w.w, w.h);
+				}
+				else 
+				{
+					w.graphics.drawRect(matrix.tx, matrix.ty, bmp.width * scaleX, bmp.height * scaleY);
+				}
+				
+				w.graphics.endFill();
+			}
+		}
+		else
+		{
+			var tileId:Int = atlas.getImageId(this.src);
+			var tileRect = atlas.getImageRect(this.src);
+			if (!scaleImg)
+			{
+				if (w.w != tileRect.width || w.h != tileRect.height)
+				{
+					w.resize(tileRect.width, tileRect.height);
+				}
+				
+				w.graphics.drawTiles(atlas.tileSheet, [0, 0, tileId], this.smooth);
+			}
+			else
+			{
+				var scaleX = w.w / tileRect.width;
+				var scaleY = w.h / tileRect.height;
+
+				matrix.identity();
+				
+				if (keepAspect) 
+				{
+					scaleX = scaleY = (this.crop ? Math.max(scaleX, scaleY) : Math.min(scaleX, scaleY));
+					matrix.scale (scaleX, scaleY);
+					matrix.translate(
+						(w.w - tileRect.width * scaleX) * 0.5,
+						(w.h - tileRect.height * scaleY) * 0.5
+					);
+				} 
+				else 
+				{
+					matrix.scale(scaleX, scaleY);
+				}
+				
+				if (this.crop) 
+				{
+					w.graphics.drawTiles(atlas.tileSheet, [0, 0, tileRect.x, tileRect.y, tileRect.width / scaleX, tileRect.height / scaleY, matrix.a, matrix.b, matrix.c, matrix.d], this.smooth, Tilesheet.TILE_TRANS_2x2 | Tilesheet.TILE_RECT);
+				} 
+				else 
+				{
+					w.graphics.drawTiles(atlas.tileSheet, [matrix.tx, matrix.ty, tileId, matrix.a, matrix.b, matrix.c, matrix.d], this.smooth, Tilesheet.TILE_TRANS_2x2);
+				}
+			}
+		}
+		
+    }//function draw()
+	#else
+	override public function draw (w:Widget) : Void {
 		
 		var bmp : BitmapData = this._bitmapData;
 
@@ -59,7 +186,7 @@ class Img extends Skin{
 
         //scale image to widget
         } else {
-            var matrix = new Matrix();
+            matrix.identity();
             var scaleX = w.w / bmp.width;
             var scaleY = w.h / bmp.height;
 
@@ -82,7 +209,8 @@ class Img extends Skin{
             }
             w.graphics.endFill();
         }
-    }//function draw()
+    }
+	#end
 
 
 /*******************************************************************************
