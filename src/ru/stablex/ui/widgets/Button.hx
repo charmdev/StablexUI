@@ -3,8 +3,8 @@ package ru.stablex.ui.widgets;
 import flash.display.DisplayObject;
 import ru.stablex.ui.skins.Skin;
 import ru.stablex.ui.UIBuilder;
-import flash.events.MouseEvent;
-import flash.events.MouseEvent;
+
+import ru.stablex.ui.events.InputEvent;
 
 
 /**
@@ -64,7 +64,7 @@ class Button extends Text{
         * wrapper for hover
         *
         */
-        static private function _onHover (e:MouseEvent) : Void {
+        static private function _onHover (e:InputEvent) : Void {
             var btn : Button = cast(e.currentTarget, Button);
             if (btn.disabled) {
                 return;
@@ -88,8 +88,8 @@ class Button extends Text{
         * wrapper for hout
         *
         */
-        static private function _onHout (e:MouseEvent) : Void {
-            var btn : Button = cast(e.currentTarget, Button);
+        static private function _onHout (e:InputEvent) : Void {
+			var btn : Button = cast(e.currentTarget, Button);
             if (btn.disabled) {
                 return;
             }
@@ -112,7 +112,7 @@ class Button extends Text{
         * wrapper for press
         *
         */
-        static private function _onPress (e:MouseEvent) : Void {
+        static private function _onPress (e:InputEvent) : Void {
             var btn : Button = cast(e.currentTarget, Button);
             if (btn.disabled) {
                 return;
@@ -136,7 +136,7 @@ class Button extends Text{
         * wrapper for release
         *
         */
-        static private function _onRelease (e:MouseEvent) : Void {
+        static private function _onRelease (e:InputEvent) : Void {
             var btn : Button = cast(e.currentTarget, Button);
             if (btn.disabled) {
                 return;
@@ -183,16 +183,12 @@ class Button extends Text{
         this.buttonMode    = this.useHandCursor = true;
         this.mouseChildren = false;
 
-        //process interactions with mouse pointer
-        this.addEventListener(MouseEvent.MOUSE_OVER, Button._onHover);
-        this.addEventListener(MouseEvent.MOUSE_OUT, Button._onHout);
-        this.addEventListener(MouseEvent.MOUSE_DOWN, Button._onPress);
-        this.addEventListener(MouseEvent.MOUSE_OUT, Button._onRelease);
-        this.addEventListener(MouseEvent.MOUSE_UP, Button._onRelease);
-        #if mobile
-            this.addEventListener(flash.events.TouchEvent.TOUCH_OUT, Button._onHout);
-            this.addEventListener(flash.events.TouchEvent.TOUCH_OUT, Button._onRelease);
-        #end
+        //process interactions with the pointer (mouse or touch)
+		this.addEventListener(InputEventType.INPUT_OVER, Button._onHover);
+		this.addEventListener(InputEventType.INPUT_OUT, Button._onHout);
+		this.addEventListener(InputEventType.INPUT_DOWN, Button._onPress);
+		this.addEventListener(InputEventType.INPUT_OUT, Button._onRelease);
+		this.addEventListener(InputEventType.INPUT_UP, Button._onRelease);
 
         this.pressed  = false;
         this.hovered  = false;
@@ -206,7 +202,7 @@ class Button extends Text{
     * Process pressing. By defualt moves widget by 1px down
     *
     */
-    public dynamic function onPress (e:MouseEvent) : Void {
+    public dynamic function onPress (e:InputEvent) : Void {
         // var btn : Button = cast(e.currentTarget, Button);
 
         // btn.y ++;
@@ -217,7 +213,7 @@ class Button extends Text{
     * Process releasing. By defualt moves widget by 1px up
     *
     */
-    public dynamic function onRelease (e:MouseEvent) : Void {
+    public dynamic function onRelease (e:InputEvent) : Void {
         // var btn : Button = cast(e.currentTarget, Button);
 
         // btn.y --;
@@ -228,7 +224,7 @@ class Button extends Text{
     * Process hover. By default does nothing
     *
     */
-    public dynamic function onHover (e:MouseEvent) : Void {
+    public dynamic function onHover (e:InputEvent) : Void {
 
     }//function ononHover()
 
@@ -237,7 +233,7 @@ class Button extends Text{
     * Process hout. By default does nothing
     *
     */
-    public dynamic function onHout (e:MouseEvent) : Void {
+    public dynamic function onHout (e:InputEvent) : Void {
 
     }//function onHout()
 

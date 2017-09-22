@@ -6,7 +6,6 @@ import haxe.macro.Expr;
 import sys.io.File;
 #end
 
-
 /**
 * Assets class wraps openfl.Assets.
 * Its methods are dynamic so you can override them to implement
@@ -22,9 +21,8 @@ class Assets{
     static dynamic public function getBitmapData(src:String, useCache:Bool = true) : flash.display.BitmapData {
         return #if openfl openfl.Assets.getBitmapData(src, useCache) #else null #end;
     }//function getBitmapData()
-
-
-    /**
+	
+	/**
     * By default it is equal to openfl.Assets.getBytes
     *
     */

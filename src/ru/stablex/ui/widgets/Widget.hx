@@ -120,7 +120,7 @@ class Widget extends TweenSprite{
     @:noCompletion public var _skinQueued : Bool = false;
     //skin name to use. One of registered with <type>ru.stablex.ui.UIBuilder</type>.regSkins()
     public var skinName (default,set_skinName) : String;
-    //whether widget content out of widgt bounds is visible
+    //whether widget content out of widget bounds is visible
     public var overflow (default,set_overflow) : Bool = true;
 
     //Tooltip for this widget. See <type>Tip</type> to know how to use it.
