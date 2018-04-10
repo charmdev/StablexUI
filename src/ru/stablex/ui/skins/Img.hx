@@ -5,7 +5,7 @@ import ru.stablex.Assets;
 import ru.stablex.ui.widgets.Widget;
 import flash.display.BitmapData;
 
-#if (openfl < "4.0.0")
+#if ((openfl < "4.0.0") && !woatlas)
 import openfl.display.Tilesheet;
 import com.nevosoft.isoframework.resources.TextureAtlas;
 #end
@@ -42,7 +42,7 @@ class Img extends Skin
     * Draw skin
     *
     */
-	#if (openfl < "4.0.0")
+	#if ((openfl < "4.0.0") && !woatlas)
     override public function draw(w:Widget):Void 
 	{
 		var bmp:BitmapData = this._bitmapData;
@@ -185,7 +185,8 @@ class Img extends Skin
 
         //scale image to widget
         } else {
-            matrix.identity();
+			
+			matrix.identity();
             var scaleX = w.w / bmp.width;
             var scaleY = w.h / bmp.height;
 
