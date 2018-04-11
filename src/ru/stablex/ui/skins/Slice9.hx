@@ -29,6 +29,7 @@ class Slice9 extends Slice3{
 
         if( bmp == null ){
             Err.trigger(this.src == null ? 'Bitmap is not specified' : 'Bitmap data not found: ' + this.src);
+			return;
         }
 
         var drawRect = new flash.geom.Rectangle(paddingLeft, paddingTop, w.w - paddingLeft - paddingRight, w.h - paddingTop - paddingBottom);

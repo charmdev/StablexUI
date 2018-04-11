@@ -57,12 +57,14 @@ class Img extends Skin
 				if (bmp == null)
 				{
 					Err.trigger('Bitmap not found: ' + this.src);
+					return;
 				}
 			}
             
         } else if (bmp == null)
 		{
             Err.trigger('Bitmap is not specified');
+			return;
         }
 		
 		if (atlas == null)
@@ -169,9 +171,11 @@ class Img extends Skin
             bmp = Assets.getBitmapData(this.src);
             if( bmp == null ){
                 Err.trigger('Bitmap not found: ' + this.src);
+				return;
             }
         }else if( bmp == null ){
             Err.trigger('Bitmap is not specified');
+			return;
         }
 
         //scale widget to image (default)

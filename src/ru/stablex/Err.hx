@@ -15,7 +15,11 @@ class Err {
     */
     static inline public function trigger(msg:String) : Void {
         #if debug
-            trace(msg);
+			#if woatlas
+			throw msg;
+			#else
+			trace(msg);
+			#end
         #end
         #if macro
             haxe.macro.Context.error(msg, haxe.macro.Context.currentPos());

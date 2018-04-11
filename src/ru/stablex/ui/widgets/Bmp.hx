@@ -93,6 +93,7 @@ class Bmp extends Widget{
             bmp = Assets.getBitmapData(this.src);
             if( bmp == null ){
                 Err.trigger('Bitmap not found: ' + this.src);
+				return;
             }
         }
 

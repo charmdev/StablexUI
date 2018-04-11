@@ -30,6 +30,7 @@ class TiledSlice9 extends Slice9{
 
         if( bmp == null ){
             Err.trigger(this.src == null ? 'Bitmap is not specified' : 'Bitmap data not found: ' + this.src);
+			return;
         }
 
         var src : Rectangle = new Rectangle();
