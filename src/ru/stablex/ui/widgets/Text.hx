@@ -180,7 +180,7 @@ class Text extends Box{
     *
     */
     private inline function html5TextFieldSizeWorkaround () : Void {
-        #if html5
+    //    #if html5
             switch (this.label.autoSize) {
                 case LEFT|RIGHT|CENTER:
                     this.label.height = SizeTools.height(this.label);
@@ -189,7 +189,7 @@ class Text extends Box{
                     }
                 case NONE:
             }
-        #end
+    //    #end
     }//function html5TextFieldSizeWorkaround()
 
 

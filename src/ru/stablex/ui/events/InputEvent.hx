@@ -7,6 +7,15 @@ import flash.events.TouchEvent;
 typedef InputEvent = MouseEvent;
 
 @:enum
+/*abstract InputEventType(String) from String to String {
+	var CLICK = MouseEvent.CLICK;
+	var INPUT_DOWN = MouseEvent.MOUSE_DOWN;
+	var INPUT_MOVE = MouseEvent.MOUSE_MOVE;
+	var INPUT_OUT = MouseEvent.MOUSE_OUT;
+	var INPUT_OVER = MouseEvent.MOUSE_OVER;
+	var INPUT_UP = MouseEvent.MOUSE_UP;
+}*/
+
 abstract InputEventType(String) from String to String {
 	var CLICK = "click";
 	var INPUT_DOWN = "mouseDown";

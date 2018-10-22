@@ -5,7 +5,7 @@ import ru.stablex.Assets;
 import ru.stablex.ui.widgets.Widget;
 import flash.display.BitmapData;
 
-#if (openfl < "4.0.0")
+#if ((openfl < "4.0.0") && !woatlas)
 import openfl.display.Tilesheet;
 import com.nevosoft.isoframework.resources.TextureAtlas;
 #end
@@ -38,12 +38,12 @@ class Img extends Skin
 	// If set to true as well as `scaleImg` and `keepAspect` the image will be cropped such that it fills the entire widget space
 	public var crop : Bool = false;
 	
-	/**
-	* Draw skin
-	*
-	*/
-	#if (openfl < "4.0.0")
-	override public function draw(w:Widget):Void 
+    /**
+    * Draw skin
+    *
+    */
+	#if ((openfl < "4.0.0") && !woatlas)
+    override public function draw(w:Widget):Void 
 	{
 		var bmp:BitmapData = this._bitmapData;
 		var atlas:TextureAtlas = null;
@@ -57,13 +57,15 @@ class Img extends Skin
 				if (bmp == null)
 				{
 					Err.trigger('Bitmap not found: ' + this.src);
+					return;
 				}
 			}
 			
 		} else if (bmp == null)
 		{
-			Err.trigger('Bitmap is not specified');
-		}
+            Err.trigger('Bitmap is not specified');
+			return;
+        }
 		
 		if (atlas == null)
 		{
@@ -165,14 +167,16 @@ class Img extends Skin
 		
 		var bmp : BitmapData = this._bitmapData;
 
-		if( bmp == null && this.src != null ){
-			bmp = Assets.getBitmapData(this.src);
-			if( bmp == null ){
-				Err.trigger('Bitmap not found: ' + this.src);
-			}
-		}else if( bmp == null ){
-			Err.trigger('Bitmap is not specified');
-		}
+        if( bmp == null && this.src != null ){
+            bmp = Assets.getBitmapData(this.src);
+            if( bmp == null ){
+                Err.trigger('Bitmap not found: ' + this.src);
+				return;
+            }
+        }else if( bmp == null ){
+            Err.trigger('Bitmap is not specified');
+			return;
+        }
 
 		//scale widget to image (default)
 		if (!scaleImg) {
@@ -183,11 +187,12 @@ class Img extends Skin
 			w.graphics.drawRect(0, 0, bmp.width, bmp.height);
 			w.graphics.endFill();
 
-		//scale image to widget
-		} else {
+        //scale image to widget
+        } else {
+			
 			matrix.identity();
-			var scaleX = w.w / bmp.width;
-			var scaleY = w.h / bmp.height;
+            var scaleX = w.w / bmp.width;
+            var scaleY = w.h / bmp.height;
 
 			if (keepAspect) {
 				scaleX = scaleY = (this.crop ? Math.max(scaleX, scaleY) : Math.min(scaleX, scaleY));

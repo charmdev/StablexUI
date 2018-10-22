@@ -103,7 +103,7 @@ class Scroll extends Widget{
     @:noCompletion private function get_box () : Widget {
         if( this.numChildren == 0 ){
             Err.trigger('Scroll widget must have at least one child.');
-            return null;
+			return null;
         }else{
 
             var child : DisplayObject = this.getChildAt(0);

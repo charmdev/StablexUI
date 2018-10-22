@@ -176,6 +176,7 @@ class TabStack extends Box{
         if( this.initialized ){
             if( !Std.is(child, TabPage) ){
                 Err.trigger('Only instances of ru.stablex.ui.widgets.TabPage can be children of ru.stablex.ui.widgets.TabStack');
+				return child;
             }
 
             //add tab's title to `.tabBar`
@@ -203,6 +204,7 @@ class TabStack extends Box{
         if( this.initialized ){
             if( !Std.is(child, TabPage) ){
                 Err.trigger('Only instances of ru.stablex.ui.widgets.Tab can be children of ru.stablex.ui.widgets.TabStack');
+				return child;
             }
 
             //add tab's title to `.tabBar`
