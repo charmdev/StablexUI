@@ -1,19 +1,5 @@
 package ru.stablex;
 
-import motion.Actuate;
-import motion.actuators.GenericActuator;
-import motion.easing.Quad;
-import motion.easing.Expo;
-import motion.easing.Bounce;
-import motion.easing.Linear;
-import motion.easing.Quint;
-import motion.easing.Elastic;
-import motion.easing.IEasing;
-import motion.easing.Back;
-import motion.easing.Quart;
-import motion.easing.Cubic;
-import motion.easing.Sine;
-
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 
@@ -133,38 +119,7 @@ class TweenSprite extends Sprite{
     *
     */
     public function tween (duration:Float, properties:Dynamic, easing:String = 'Linear.easeNone', overwrite:Bool = true, customActuator = null) {
-        switch(easing){
-            case 'Quad.easeInOut'    : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Quad.easeInOut);
-            case 'Quad.easeOut'      : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Quad.easeOut);
-            case 'Quad.easeIn'       : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Quad.easeIn);
-            case 'Expo.easeInOut'    : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Expo.easeInOut);
-            case 'Expo.easeOut'      : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Expo.easeOut);
-            case 'Expo.easeIn'       : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Expo.easeIn);
-            case 'Bounce.easeInOut'  : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Bounce.easeInOut);
-            case 'Bounce.easeOut'    : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Bounce.easeOut);
-            case 'Bounce.easeIn'     : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Bounce.easeIn);
-            case 'Quint.easeInOut'   : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Quint.easeInOut);
-            case 'Quint.easeOut'     : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Quint.easeOut);
-            case 'Quint.easeIn'      : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Quint.easeIn);
-            case 'Elastic.easeInOut' : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Elastic.easeInOut);
-            case 'Elastic.easeOut'   : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Elastic.easeOut);
-            case 'Elastic.easeIn'    : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Elastic.easeIn);
-            case 'Back.easeInOut'    : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Back.easeInOut);
-            case 'Back.easeOut'      : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Back.easeOut);
-            case 'Back.easeIn'       : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Back.easeIn);
-            case 'Quart.easeInOut'   : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Quart.easeInOut);
-            case 'Quart.easeOut'     : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Quart.easeOut);
-            case 'Quart.easeIn'      : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Quart.easeIn);
-            case 'Cubic.easeInOut'   : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Cubic.easeInOut);
-            case 'Cubic.easeOut'     : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Cubic.easeOut);
-            case 'Cubic.easeIn'      : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Cubic.easeIn);
-            case 'Sine.easeInOut'    : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Sine.easeInOut);
-            case 'Sine.easeOut'      : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Sine.easeOut);
-            case 'Sine.easeIn'       : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Sine.easeIn);
 
-            case 'Linear.easeNone': return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Linear.easeNone);
-            default               : return Actuate.tween(this, duration, properties, overwrite, customActuator).ease(Linear.easeNone);
-        }
     }//function tween()
 
 
@@ -173,7 +128,6 @@ class TweenSprite extends Sprite{
     *
     */
     public function tweenStop(properties:Dynamic = null, complete:Bool = false, sendEvent:Bool = false) : Void {
-        Actuate.stop(this, properties, complete, sendEvent);
     }//function tweenStop()
 
 
