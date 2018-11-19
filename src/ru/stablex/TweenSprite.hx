@@ -119,7 +119,7 @@ class TweenSprite extends Sprite{
     *
     */
     public function tween (duration:Float, properties:Dynamic, easing:String = 'Linear.easeNone', overwrite:Bool = true, customActuator = null) {
-
+        return {onComplete:function(?_:Dynamic, ?rest:Array<Dynamic>) {}};
     }//function tween()
 
 
