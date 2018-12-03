@@ -1069,11 +1069,14 @@ class UIBuilder {
     * @private
     */
     @:noCompletion static public inline function save (obj:Widget) : Void{
+        /*
         if( UIBuilder._objects.exists(obj.id) ){
             Err.trigger('Widget id "' + obj.id + '" is already used');
         }else{
             UIBuilder._objects.set(obj.id, obj);
         }
+        */
+        UIBuilder._objects.set(obj.id, obj);
     }//function save()
 
 

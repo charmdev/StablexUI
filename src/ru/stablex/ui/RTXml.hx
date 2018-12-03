@@ -211,7 +211,7 @@ class RTXml {
         obj._onCreate();
 
         if( args != null ){
-            this.interp.variables.remove("__ui__arguments");
+            //this.interp.variables.remove("__ui__arguments");
         }
 
         return cast obj;

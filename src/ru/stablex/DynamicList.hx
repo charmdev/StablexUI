@@ -7,7 +7,7 @@ package ru.stablex;
 * New object is created every time you request an undefined property.
 * So dynamicListInstance.someProperty never returns null
 */
-class DynamicList<T> implements Dynamic<T>{
+class DynamicList<T> {
     //class for objects in this list
     private var _cls : Class<T>;
     #if haxe3

@@ -166,8 +166,13 @@ class TweenSprite extends Sprite{
         while( this.numChildren > 0 ){
             child = this.removeChildAt(0);
 
-            if( recursive && Std.is(child, TweenSprite) ){
-                cast(child, TweenSprite).free(true);
+            if( recursive && Std.is(child, ru.stablex.ui.widgets.Widget) ){
+                var w:ru.stablex.ui.widgets.Widget = cast child;
+                w.free();
+            }
+            else if (recursive && Std.is(child, TweenSprite)) {
+                var ts:TweenSprite = cast child;
+                ts.free();
             }
         }
     }//function freeChildren()

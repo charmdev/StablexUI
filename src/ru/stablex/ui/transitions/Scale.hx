@@ -2,7 +2,6 @@ package ru.stablex.ui.transitions;
 
 import flash.display.DisplayObject;
 import ru.stablex.ui.widgets.Widget;
-import motion.Actuate;
 
 
 /**
