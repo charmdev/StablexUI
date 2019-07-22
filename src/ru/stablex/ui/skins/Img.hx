@@ -143,7 +143,7 @@ class Img extends Skin
 					w.resize(tileRect.width, tileRect.height);
 				}
 				
-				w.graphics.drawTiles(atlas.tileSheet, [0, 0, tileId], this.smooth);
+				w.graphics.drawTiles(atlas.tileSheet, [0.0, 0.0, tileId], this.smooth);
 			}
 			else
 			{

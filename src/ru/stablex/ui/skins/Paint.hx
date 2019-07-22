@@ -22,6 +22,7 @@ class Paint extends Rect{
     override public function draw (w:Widget) : Void {
         if( this.color >= 0 ){
             w.graphics.beginFill(this.color, this.alpha);
+        //    w.graphics.beginFill(Std.int(Math.random() * 0xffffff), 0.5);
         }
 
         super.draw(w);
