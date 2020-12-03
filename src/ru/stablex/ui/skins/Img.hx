@@ -48,6 +48,11 @@ class Img extends Skin
 		var bmp:BitmapData = this._bitmapData;
 		var atlas:TextureAtlas = null;
 
+		if (bmp == null && (this.src == null || this.src == ""))
+		{
+			return;
+		}
+
         if (bmp == null && this.src != null)
 		{
 			atlas = com.nevosoft.isoframework.ResourceManager.instance.getAtlasOfRegion(this.src);
